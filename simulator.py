@@ -5,32 +5,50 @@ import sys
 from struct import unpack_from
 from threading import Thread
 from time import sleep
+import serial #import serial module from pyserial
+
+#replace '/dev/ttyUSB0' and 9600 with proper baud rate
+serial_port_name = '/dev/ttyUSB0'
+baud_rate = 9600
 
 
 def send_tm(simulator):
-    tm_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    #tm_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    serial_port = serial.Serial(serial_port_name, baud_rate)
+    
+
+#The send_tm function is defined, which takes a 'simulator' object as a parameter. 
+#It creates a UDP socket ('tm_socket') for sending telemetry (TM) data to the YAMCS server.
 
     with io.open('testdata.ccsds', 'rb') as f:
+#opens the file in binary mode
         simulator.tm_counter = 1
+#initalize simulated telemetry counter to one
         header = bytearray(6)
+#defines the header as an array of 6 bytes
         while f.readinto(header) == 6:
             (len,) = unpack_from('>H', header, 4)
-
+#length of packet is unpacked from the header. This assumes the length is stored as an unsigned short (2 bytes) in big-endian format
             packet = bytearray(len + 7)
             f.seek(-6, io.SEEK_CUR)
             f.readinto(packet)
 
-            tm_socket.sendto(packet, ('127.0.0.1', 10015))
+            #tm_socket.sendto(packet, ('127.0.0.1', 10015))
+            serial_port.write(packet)
+            #change IP address and port number if needed to match YAMCS server configuration
             simulator.tm_counter += 1
 
             sleep(1)
 
 
 def receive_tc(simulator):
-    tc_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    tc_socket.bind(('127.0.0.1', 10025))
+    #tc_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    #tc_socket.bind(('127.0.0.1', 10025))
+    serial_port = serial.Serial(serial_port_name, baud_rate) 
     while True:
-        data, _ = tc_socket.recvfrom(4096)
+        #data, _ = tc_socket.recvfrom(4096)
+        data = serial_port.read(serial_port.in_waiting)
+        
         simulator.last_tc = data
         simulator.tc_counter += 1
 

@@ -23,18 +23,38 @@ services:
   - class: org.yamcs.timeline.TimelineService
 
 dataLinks:
-  - name: udp-in
-    class: org.yamcs.tctm.UdpTmDataLink
-    stream: tm_realtime
-    port: 10015
-    packetPreprocessorClassName: com.example.myproject.MyPacketPreprocessor
+  # - name: udp-in
+  #   class: org.yamcs.tctm.UdpTmDataLink
+  #   stream: tm_realtime
+  #   port: 10015
+  #   packetPreprocessorClassName: com.example.myproject.MyPacketPreprocessor
 
-  - name: udp-out
-    class: org.yamcs.tctm.UdpTcDataLink
-    stream: tc_realtime
-    host: localhost
-    port: 10025
-    commandPostprocessorClassName: com.example.myproject.MyCommandPostprocessor
+  # - name: udp-out
+  #   class: org.yamcs.tctm.UdpTcDataLink
+  #   stream: tc_realtime
+  #   host: localhost
+  #   port: 10025
+  #   commandPostprocessorClassName: com.example.myproject.MyCommandPostprocessor
+
+  - name: serial-out
+    class: org.yamcs.tctm.SerialTMDataLink
+    port: /dev/ttyUSB0
+    baudRate: 9600
+    dataBits: 8
+    stopBits: 1
+    parity: none
+    encoding: utf-8
+    flowControl: none
+
+  - name: serial-in
+    class: org.yamcs.serial.SerialTcDataLink
+    port: /dev/ttyUSB0
+    baudRate: 9600
+    databits: 8
+    stopBits: 1
+    parity: none
+    encoding: utf-8
+    flowControl: none    
 
 mdb:
   # Configuration of the active loaders

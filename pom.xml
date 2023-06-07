@@ -32,6 +32,13 @@
       <artifactId>yamcs-web</artifactId>
       <version>5.8.1</version>
     </dependency>
+
+    <dependency>
+    <groupId>org.yamcs</groupId>
+    <artifactId>tse</artifactId>
+    <version>5.8.1</version>
+  </dependency>
+
   </dependencies>
 
   <build>

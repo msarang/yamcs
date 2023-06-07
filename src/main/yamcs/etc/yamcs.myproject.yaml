@@ -37,25 +37,21 @@ dataLinks:
   #   commandPostprocessorClassName: com.example.myproject.MyCommandPostprocessor
 
   - name: serial-out
-    class: org.yamcs.tctm.SerialTMDataLink
-    port: /dev/ttyUSB0
+    class: org.yamcs.tse.SerialPortDriver
+    path: /dev/ttyUSB0
     baudRate: 9600
     dataBits: 8
-    stopBits: 1
     parity: none
     encoding: utf-8
-    flowControl: none
 
   - name: serial-in
-    class: org.yamcs.serial.SerialTcDataLink
-    port: /dev/ttyUSB0
+    class: org.yamcs.tse.SerialPortDriver
+    path: /dev/ttyUSB0
     baudRate: 9600
     databits: 8
-    stopBits: 1
     parity: none
     encoding: utf-8
-    flowControl: none    
-
+    
 mdb:
   # Configuration of the active loaders
   # Valid loaders are: sheet, xtce or fully qualified name of the class

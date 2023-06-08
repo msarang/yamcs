@@ -50,10 +50,10 @@ mdb:
   - type: xtce
     args:
       file: mdb/xtce.xml
-  - type: org.yamcs.xtce.TseLoader
-    subLoaders:
-      - type: sheet
-        spec: mdb/tse/simulator.xls
+  # - type: org.yamcs.xtce.TseLoader
+  #   subLoaders:
+  #     - type: sheet
+  #       spec: mdb/tse/simulator.xls
        
 
 # Configuration for streams created at server startup

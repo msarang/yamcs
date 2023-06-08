@@ -1,6 +1,6 @@
 services:
  - class: org.yamcs.http.HttpServer
-    args:
+   args:
       port: 8090
       address: "0.0.0.0" # https://github.com/yamcs/quickstart/issues/11
       cors:
@@ -8,7 +8,7 @@ services:
         allowCredentials: false
   #- class: org.yamcs.tse
  - class: org.yamcs.tse.TseCommander
-    args:
+   args:
       telnet: 
         port: 8023
       #tc:

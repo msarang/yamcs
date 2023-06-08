@@ -11,11 +11,11 @@ services:
    args:
       telnet: 
         port: 8023
-      #tc:
-        #port: 8135
-      #tm:
-        #host: localhost
-        #port: 31002
+      tc:
+        port: 8135
+      tm:
+        host: localhost
+        port: 31002
       
 # This is where Yamcs will persist its data. Paths are resolved relative to where Yamcs is running
 # from (by default: target/yamcs). This means that `mvn clean` will remove also persisted data.

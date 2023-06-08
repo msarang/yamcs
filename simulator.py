@@ -1,6 +1,5 @@
 import binascii
 import io
-import socket
 import sys
 from struct import unpack_from
 from threading import Thread
@@ -8,7 +7,7 @@ from time import sleep
 import serial #import serial module from pyserial
 
 #replace '/dev/ttyUSB0' and 9600 with proper baud rate
-serial_port_name = '/dev/ttyUSB0'
+serial_port_name = 'COM1'
 baud_rate = 9600
 
 #The send_tm function is defined, which takes a 'simulator' object as a parameter. 

@@ -7,7 +7,7 @@ from time import sleep
 import serial
 
 # Replace 'COM1' and 9600 with the appropriate virtual port name and baud rate
-serial_port_name = '/dev/ttyUSB0'
+serial_port_name = 'COM1'
 baud_rate = 9600
 
 # The send_tm function is defined, which takes a 'simulator' object as a parameter.

@@ -2,7 +2,7 @@ instruments:
   - name: simulator
     class: org.yamcs.tse.SerialPortDriver
     args:
-      path: /dev/ttyUSB0
+      path: COM1
       responseTimeout: 100
       baudrate: 9600
       dataBits: 8

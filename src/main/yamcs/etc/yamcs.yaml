@@ -6,7 +6,7 @@ services:
       cors:
         allowOrigin: "*"
         allowCredentials: false
-  - class: org.yamcs.tse
+  #- class: org.yamcs.tse
   - class: org.yamcs.tse.TseCommander
 
 # This is where Yamcs will persist its data. Paths are resolved relative to where Yamcs is running

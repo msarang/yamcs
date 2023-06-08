@@ -11,14 +11,10 @@ import serial #import serial module from pyserial
 serial_port_name = '/dev/ttyUSB0'
 baud_rate = 9600
 
-
-def send_tm(simulator):
-    #tm_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    serial_port = serial.Serial(serial_port_name, baud_rate)
-    
-
 #The send_tm function is defined, which takes a 'simulator' object as a parameter. 
-#It creates a UDP socket ('tm_socket') for sending telemetry (TM) data to the YAMCS server.
+def send_tm(simulator):
+
+    serial_port = serial.Serial(serial_port_name, baud_rate)
 
     with io.open('testdata.ccsds', 'rb') as f:
 #opens the file in binary mode
@@ -32,26 +28,19 @@ def send_tm(simulator):
             packet = bytearray(len + 7)
             f.seek(-6, io.SEEK_CUR)
             f.readinto(packet)
-
-            #tm_socket.sendto(packet, ('127.0.0.1', 10015))
             serial_port.write(packet)
-            #change IP address and port number if needed to match YAMCS server configuration
             simulator.tm_counter += 1
 
             sleep(1)
 
 
 def receive_tc(simulator):
-    #tc_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    #tc_socket.bind(('127.0.0.1', 10025))
     serial_port = serial.Serial(serial_port_name, baud_rate) 
     while True:
-        #data, _ = tc_socket.recvfrom(4096)
         data = serial_port.read(serial_port.in_waiting)
         
         simulator.last_tc = data
         simulator.tc_counter += 1
-
 
 class Simulator():
 

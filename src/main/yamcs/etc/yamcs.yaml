@@ -11,7 +11,7 @@ services:
    args:
       telnet: 
         port: 8023
-      tc:
+      tctm:
         port: 8135
       tm:
         host: localhost

@@ -36,7 +36,7 @@ dataLinks:
   #   port: 10025
   #   commandPostprocessorClassName: com.example.myproject.MyCommandPostprocessor
 
-  - name: serial-out
+  - name: serial-out-in
     class: org.yamcs.tse.SerialPortDriver
     path: /dev/ttyUSB0
     baudRate: 9600
@@ -44,20 +44,17 @@ dataLinks:
     parity: none
     encoding: utf-8
 
-  - name: serial-in
-    class: org.yamcs.tse.SerialPortDriver
-    path: /dev/ttyUSB0
-    baudRate: 9600
-    databits: 8
-    parity: none
-    encoding: utf-8
-    
 mdb:
   # Configuration of the active loaders
   # Valid loaders are: sheet, xtce or fully qualified name of the class
   - type: xtce
     args:
       file: mdb/xtce.xml
+  - type: org.yamcs.xtce.TseLoader
+    subLoaders:
+      - type: sheet
+        spec: mdb/tse/simulator.xls
+       
 
 # Configuration for streams created at server startup
 streamConfig:

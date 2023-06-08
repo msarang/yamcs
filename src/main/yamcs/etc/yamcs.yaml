@@ -1,5 +1,5 @@
 services:
-  - class: org.yamcs.http.HttpServer
+ - class: org.yamcs.http.HttpServer
     args:
       port: 8090
       address: "0.0.0.0" # https://github.com/yamcs/quickstart/issues/11
@@ -7,17 +7,16 @@ services:
         allowOrigin: "*"
         allowCredentials: false
   #- class: org.yamcs.tse
-  - class: org.yamcs.tse.TseCommander
+ - class: org.yamcs.tse.TseCommander
     args:
       telnet: 
         port: 8023
-      tc:
-        port: 8135
-      tm:
-        host: localhost
-        port: 31002
-
-
+      #tc:
+        #port: 8135
+      #tm:
+        #host: localhost
+        #port: 31002
+      
 # This is where Yamcs will persist its data. Paths are resolved relative to where Yamcs is running
 # from (by default: target/yamcs). This means that `mvn clean` will remove also persisted data.
 # Change this property to an absolute path in case you want to persist your data.
